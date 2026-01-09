@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flame/game.dart';
-import 'game/vita_game.dart';
+import 'package:flutter/services.dart';
+import 'screens/menu_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Lock to portrait mode
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
+  
+  // Hide system UI overlays for immersive experience
+  SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.edgeToEdge,
+    overlays: [SystemUiOverlay.top],
+  );
+  
   runApp(const VitaCardGameApp());
 }
 
@@ -12,14 +25,13 @@ class VitaCardGameApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Vita Card Game',
+      title: 'Memory Master',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
         useMaterial3: true,
+        fontFamily: 'sans-serif',
       ),
-      home: GameWidget<VitaGame>.controlled(
-        gameFactory: VitaGame.new,
-      ),
+      home: const MenuScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
