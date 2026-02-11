@@ -1,19 +1,17 @@
 {
   "roots": [
-    "memory_garden"
+    "card_game"
   ],
   "packages": [
     {
-      "name": "memory_garden",
+      "name": "card_game",
       "version": "1.0.0+1",
       "dependencies": [
         "cupertino_icons",
-        "equatable",
-        "flame",
-        "flame_audio",
         "flutter",
         "flutter_animate",
         "google_fonts",
+        "provider",
         "shared_preferences"
       ],
       "devDependencies": [
@@ -23,7 +21,7 @@
     },
     {
       "name": "flutter_lints",
-      "version": "2.0.3",
+      "version": "3.0.2",
       "dependencies": [
         "lints"
       ]
@@ -52,27 +50,6 @@
       "dependencies": []
     },
     {
-      "name": "equatable",
-      "version": "2.0.8",
-      "dependencies": [
-        "collection",
-        "meta"
-      ]
-    },
-    {
-      "name": "shared_preferences",
-      "version": "2.5.4",
-      "dependencies": [
-        "flutter",
-        "shared_preferences_android",
-        "shared_preferences_foundation",
-        "shared_preferences_linux",
-        "shared_preferences_platform_interface",
-        "shared_preferences_web",
-        "shared_preferences_windows"
-      ]
-    },
-    {
       "name": "google_fonts",
       "version": "6.3.3",
       "dependencies": [
@@ -91,24 +68,25 @@
       ]
     },
     {
-      "name": "flame_audio",
-      "version": "2.11.12",
+      "name": "shared_preferences",
+      "version": "2.5.4",
       "dependencies": [
-        "audioplayers",
-        "flame",
         "flutter",
-        "synchronized"
+        "shared_preferences_android",
+        "shared_preferences_foundation",
+        "shared_preferences_linux",
+        "shared_preferences_platform_interface",
+        "shared_preferences_web",
+        "shared_preferences_windows"
       ]
     },
     {
-      "name": "flame",
-      "version": "1.34.0",
+      "name": "provider",
+      "version": "6.1.5+1",
       "dependencies": [
         "collection",
         "flutter",
-        "meta",
-        "ordered_set",
-        "vector_math"
+        "nested"
       ]
     },
     {
@@ -125,7 +103,7 @@
     },
     {
       "name": "lints",
-      "version": "2.1.1",
+      "version": "3.0.0",
       "dependencies": []
     },
     {
@@ -213,6 +191,43 @@
       ]
     },
     {
+      "name": "path_provider",
+      "version": "2.1.5",
+      "dependencies": [
+        "flutter",
+        "path_provider_android",
+        "path_provider_foundation",
+        "path_provider_linux",
+        "path_provider_platform_interface",
+        "path_provider_windows"
+      ]
+    },
+    {
+      "name": "http",
+      "version": "1.6.0",
+      "dependencies": [
+        "async",
+        "http_parser",
+        "meta",
+        "web"
+      ]
+    },
+    {
+      "name": "crypto",
+      "version": "3.0.7",
+      "dependencies": [
+        "typed_data"
+      ]
+    },
+    {
+      "name": "flutter_shaders",
+      "version": "0.1.3",
+      "dependencies": [
+        "flutter",
+        "vector_math"
+      ]
+    },
+    {
       "name": "shared_preferences_windows",
       "version": "2.4.1",
       "dependencies": [
@@ -271,70 +286,11 @@
       ]
     },
     {
-      "name": "path_provider",
-      "version": "2.1.5",
+      "name": "nested",
+      "version": "1.0.0",
       "dependencies": [
-        "flutter",
-        "path_provider_android",
-        "path_provider_foundation",
-        "path_provider_linux",
-        "path_provider_platform_interface",
-        "path_provider_windows"
+        "flutter"
       ]
-    },
-    {
-      "name": "http",
-      "version": "1.6.0",
-      "dependencies": [
-        "async",
-        "http_parser",
-        "meta",
-        "web"
-      ]
-    },
-    {
-      "name": "crypto",
-      "version": "3.0.7",
-      "dependencies": [
-        "typed_data"
-      ]
-    },
-    {
-      "name": "flutter_shaders",
-      "version": "0.1.3",
-      "dependencies": [
-        "flutter",
-        "vector_math"
-      ]
-    },
-    {
-      "name": "synchronized",
-      "version": "3.4.0",
-      "dependencies": []
-    },
-    {
-      "name": "audioplayers",
-      "version": "6.5.1",
-      "dependencies": [
-        "audioplayers_android",
-        "audioplayers_darwin",
-        "audioplayers_linux",
-        "audioplayers_platform_interface",
-        "audioplayers_web",
-        "audioplayers_windows",
-        "file",
-        "flutter",
-        "http",
-        "meta",
-        "path_provider",
-        "synchronized",
-        "uuid"
-      ]
-    },
-    {
-      "name": "ordered_set",
-      "version": "8.0.0",
-      "dependencies": []
     },
     {
       "name": "sky_engine",
@@ -430,33 +386,6 @@
       ]
     },
     {
-      "name": "file",
-      "version": "7.0.1",
-      "dependencies": [
-        "meta",
-        "path"
-      ]
-    },
-    {
-      "name": "web",
-      "version": "1.1.1",
-      "dependencies": []
-    },
-    {
-      "name": "flutter_web_plugins",
-      "version": "0.0.0",
-      "dependencies": [
-        "flutter"
-      ]
-    },
-    {
-      "name": "plugin_platform_interface",
-      "version": "2.1.8",
-      "dependencies": [
-        "meta"
-      ]
-    },
-    {
       "name": "path_provider_linux",
       "version": "2.2.1",
       "dependencies": [
@@ -484,6 +413,11 @@
       ]
     },
     {
+      "name": "web",
+      "version": "1.1.1",
+      "dependencies": []
+    },
+    {
       "name": "http_parser",
       "version": "4.1.2",
       "dependencies": [
@@ -501,64 +435,25 @@
       ]
     },
     {
-      "name": "uuid",
-      "version": "4.5.2",
+      "name": "file",
+      "version": "7.0.1",
       "dependencies": [
-        "crypto",
-        "fixnum",
-        "meta"
-      ]
-    },
-    {
-      "name": "audioplayers_windows",
-      "version": "4.2.1",
-      "dependencies": [
-        "audioplayers_platform_interface",
-        "flutter"
-      ]
-    },
-    {
-      "name": "audioplayers_web",
-      "version": "5.1.1",
-      "dependencies": [
-        "audioplayers_platform_interface",
-        "flutter",
-        "flutter_web_plugins",
-        "web"
-      ]
-    },
-    {
-      "name": "audioplayers_platform_interface",
-      "version": "7.1.1",
-      "dependencies": [
-        "collection",
-        "flutter",
         "meta",
-        "plugin_platform_interface"
+        "path"
       ]
     },
     {
-      "name": "audioplayers_linux",
-      "version": "4.2.1",
+      "name": "flutter_web_plugins",
+      "version": "0.0.0",
       "dependencies": [
-        "audioplayers_platform_interface",
         "flutter"
       ]
     },
     {
-      "name": "audioplayers_darwin",
-      "version": "6.3.0",
+      "name": "plugin_platform_interface",
+      "version": "2.1.8",
       "dependencies": [
-        "audioplayers_platform_interface",
-        "flutter"
-      ]
-    },
-    {
-      "name": "audioplayers_android",
-      "version": "5.2.1",
-      "dependencies": [
-        "audioplayers_platform_interface",
-        "flutter"
+        "meta"
       ]
     },
     {
@@ -583,11 +478,6 @@
         "meta",
         "path"
       ]
-    },
-    {
-      "name": "fixnum",
-      "version": "1.1.1",
-      "dependencies": []
     }
   ],
   "configVersion": 1

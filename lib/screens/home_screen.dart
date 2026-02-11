@@ -1,121 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../utils/constants.dart';
-import 'garden_screen.dart';
+import 'package:provider/provider.dart';
+import '../providers/settings_provider.dart';
+import 'game_screen.dart';
+import 'level_select_screen.dart';
+import 'settings_screen.dart';
 
-/// Home Screen - Calm introduction to Memory Garden
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              GardenColors.skyMorning,
-              GardenColors.skyEvening,
-            ],
-          ),
-        ),
+        decoration: const BoxDecoration(gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Color(0xFF0D1B2A), Color(0xFF1B2838), Color(0xFF1B4332)])),
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
+          child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const Spacer(flex: 2),
+                ShaderMask(shaderCallback: (bounds) => const LinearGradient(colors: [Color(0xFFFFD700), Color(0xFFFFA000), Color(0xFFFFD700)]).createShader(bounds), child: const Text('麻雀', style: TextStyle(fontSize: 72, fontWeight: FontWeight.bold, color: Colors.white))).animate().fadeIn(duration: 800.ms).slideY(begin: -0.3, end: 0),
+                const SizedBox(height: 10),
+                Text('CARD GAME', style: TextStyle(fontSize: 18, color: Colors.white.withOpacity(0.6), letterSpacing: 8, fontWeight: FontWeight.w300)).animate().fadeIn(delay: 300.ms, duration: 800.ms),
+                const Spacer(flex: 2),
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  _buildMiniTile('東', const Color(0xFFC62828)), const SizedBox(width: 8),
+                  _buildMiniTile('南', const Color(0xFF2E7D32)), const SizedBox(width: 8),
+                  _buildMiniTile('西', const Color(0xFF1565C0)), const SizedBox(width: 8),
+                  _buildMiniTile('北', const Color(0xFF6A1B9A)),
+                ]).animate().fadeIn(delay: 500.ms, duration: 600.ms).scale(begin: const Offset(0.8, 0.8)),
                 const Spacer(),
-                
-                // Title
-                Text(
-                  'MEMORY',
-                  style: GoogleFonts.cormorantGaramond(
-                    fontSize: 56,
-                    fontWeight: FontWeight.w300,
-                    color: GardenColors.textPrimary,
-                    letterSpacing: 8,
-                    height: 1.0,
-                  ),
-                ).animate()
-                  .fadeIn(duration: 1200.ms, curve: GardenCurves.gentle)
-                  .slideY(begin: 0.1, end: 0),
-                
-                const SizedBox(height: 8),
-                
-                Text(
-                  'GARDEN',
-                  style: GoogleFonts.cormorantGaramond(
-                    fontSize: 64,
-                    fontWeight: FontWeight.w300,
-                    color: GardenColors.leafGreen,
-                    letterSpacing: 10,
-                    height: 1.0,
-                  ),
-                ).animate()
-                  .fadeIn(delay: 400.ms, duration: 1200.ms, curve: GardenCurves.gentle)
-                  .slideY(begin: 0.1, end: 0),
-                
-                const SizedBox(height: 32),
-                
-                // Tagline
-                Text(
-                  '"You don\'t win a game—\nyou grow it."',
-                  textAlign: TextAlign.center,
-                  style: GardenTextStyles.subtitle.copyWith(
-                    fontStyle: FontStyle.italic,
-                    height: 1.6,
-                  ),
-                ).animate()
-                  .fadeIn(delay: 800.ms, duration: 1000.ms),
-                
-                const SizedBox(height: 48),
-                
-                // Decorative plant
-                const Text(
-                  '🌿',
-                  style: TextStyle(fontSize: 48),
-                ).animate()
-                  .fadeIn(delay: 1200.ms)
-                  .scale(begin: Offset(0.5, 0.5)),
-                
-                const Spacer(),
-                
-                // Begin button
-                _CalmButton(
-                  label: 'Begin',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder: (_, __, ___) => const GardenScreen(),
-                        transitionDuration: const Duration(milliseconds: 1000),
-                        transitionsBuilder: (_, animation, __, child) {
-                          return FadeTransition(
-                            opacity: animation,
-                            child: child,
-                          );
-                        },
-                      ),
-                    );
-                  },
-                ).animate()
-                  .fadeIn(delay: 1600.ms, duration: 800.ms)
-                  .slideY(begin: 0.2, end: 0),
-                
-                const SizedBox(height: 24),
-                
-                // Subtle hint
-                Text(
-                  'No timer • No pressure • Just growth',
-                  style: GardenTextStyles.hint,
-                ).animate()
-                  .fadeIn(delay: 2000.ms, duration: 600.ms),
-                
-                const SizedBox(height: 48),
+                _buildMenuButton(context, icon: Icons.play_arrow_rounded, label: 'PLAY', color: const Color(0xFF4CAF50), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const GameScreen(layoutIndex: 0)))).animate().fadeIn(delay: 700.ms).slideX(begin: -0.3),
+                const SizedBox(height: 16),
+                _buildMenuButton(context, icon: Icons.grid_view_rounded, label: 'LEVELS', color: const Color(0xFF2196F3), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const LevelSelectScreen()))).animate().fadeIn(delay: 800.ms).slideX(begin: -0.3),
+                const SizedBox(height: 16),
+                _buildMenuButton(context, icon: Icons.settings_rounded, label: 'SETTINGS', color: const Color(0xFF9C27B0), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const SettingsScreen()))).animate().fadeIn(delay: 900.ms).slideX(begin: -0.3),
+                const Spacer(flex: 2),
+                Consumer<SettingsProvider>(builder: (context, settings, child) => Text('High Score: ${settings.highScore}', style: TextStyle(color: Colors.amber.withOpacity(0.8), fontSize: 16, fontWeight: FontWeight.w600))).animate().fadeIn(delay: 1000.ms),
+                const SizedBox(height: 20),
               ],
             ),
           ),
@@ -123,58 +45,12 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-}
 
-/// Calm, minimal button design
-class _CalmButton extends StatefulWidget {
-  final String label;
-  final VoidCallback onTap;
+  Widget _buildMiniTile(String symbol, Color color) {
+    return Container(width: 50, height: 65, decoration: BoxDecoration(color: const Color(0xFFF5F0E1), borderRadius: BorderRadius.circular(8), border: Border.all(color: const Color(0xFFD4C5A0), width: 2), boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.4), offset: const Offset(2, 3), blurRadius: 5)]), child: Center(child: Text(symbol, style: TextStyle(fontSize: 28, color: color, fontWeight: FontWeight.bold))));
+  }
 
-  const _CalmButton({
-    required this.label,
-    required this.onTap,
-  });
-
-  @override
-  State<_CalmButton> createState() => _CalmButtonState();
-}
-
-class _CalmButtonState extends State<_CalmButton> {
-  bool _isPressed = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTapDown: (_) => setState(() => _isPressed = true),
-      onTapUp: (_) {
-        setState(() => _isPressed = false);
-        widget.onTap();
-      },
-      onTapCancel: () => setState(() => _isPressed = false),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        curve: GardenCurves.gentle,
-        padding: const EdgeInsets.symmetric(horizontal: 64, vertical: 18),
-        decoration: BoxDecoration(
-          color: _isPressed
-              ? GardenColors.leafGreen.withOpacity(0.8)
-              : GardenColors.leafGreen.withOpacity(0.2),
-          border: Border.all(
-            color: GardenColors.leafGreen.withOpacity(0.6),
-            width: 1.5,
-          ),
-          borderRadius: BorderRadius.circular(30),
-        ),
-        child: Text(
-          widget.label,
-          style: GoogleFonts.cormorantGaramond(
-            fontSize: 24,
-            fontWeight: FontWeight.w400,
-            color: GardenColors.textPrimary,
-            letterSpacing: 4,
-          ),
-        ),
-      ),
-    );
+  Widget _buildMenuButton(BuildContext context, {required IconData icon, required String label, required Color color, required VoidCallback onTap}) {
+    return SizedBox(width: 260, height: 56, child: ElevatedButton(onPressed: onTap, style: ElevatedButton.styleFrom(backgroundColor: color.withOpacity(0.2), foregroundColor: Colors.white, side: BorderSide(color: color.withOpacity(0.5), width: 1.5), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)), elevation: 0), child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [Icon(icon, size: 28, color: color), const SizedBox(width: 12), Text(label, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, letterSpacing: 3, color: color))])));
   }
 }
