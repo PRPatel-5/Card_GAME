@@ -1,80 +1,201 @@
 import 'package:flutter/material.dart';
 import 'package:flame/components.dart';
 
-class GameConstants {
-  static final Vector2 cardSize = Vector2(70, 95);
-  static const double cardSpacing = 80;
+/// Design System for Memory Garden
+/// Focused on: Calm, Organic, Emotional
+class GardenConstants {
+  // Card System
+  static final Vector2 cardSize = Vector2(75, 100);
+  static const double cardSpacing = 85;
   static const int gridColumns = 4;
   static const int gridRows = 4;
-  static const double animationDuration = 0.5;
-  static const double flipDuration = 0.3;
-  static const double matchDelay = 0.8;
-  static const double cardRadius = 12.0;
   
-  // Game modes
-  static const int easyPairs = 8;
-  static const int mediumPairs = 12;
-  static const int hardPairs = 16;
+  // Timing (Everything is SLOW and CALM)
+  static const double flipDuration = 0.6; // Slower than normal
+  static const double growthDuration = 1.2; // Plants grow slowly
+  static const double fadeInDuration = 0.8;
+  static const double breathingCycle = 3.0; // Plants "breathe"
+  
+  // Card radius
+  static const double cardRadius = 16.0;
+  
+  // Garden zones (for plant placement)
+  static const double groundLevel = 500.0;
 }
 
-class GameColors {
-  // Modern gradient backgrounds
-  static const Color primaryDark = Color(0xFF0F172A);
-  static const Color primaryLight = Color(0xFF1E293B);
+/// Calming Color Palette
+/// Inspired by: Early morning garden, soft sunlight, earth
+class GardenColors {
+  // Base garden colors (pastel and earthy)
+  static const Color skyMorning = Color(0xFFE8F4F8);
+  static const Color skyEvening = Color(0xFFFFF4E6);
   
-  // Card colors with gradients
-  static const Color cardBackStart = Color(0xFF6366F1);
-  static const Color cardBackEnd = Color(0xFF8B5CF6);
+  // Ground colors
+  static const Color soilDark = Color(0xFF6B5D4F);
+  static const Color soilLight = Color(0xFF8B7765);
+  static const Color grass = Color(0xFFB8D4B8);
   
-  static const Color cardFrontStart = Color(0xFFFFFFFF);
-  static const Color cardFrontEnd = Color(0xFFF8FAFC);
+  // Card colors (soft, non-aggressive)
+  static const Color cardBack = Color(0xFFE8E0D5); // Cream
+  static const Color cardFront = Color(0xFFFFFBF5); // Warm white
+  static const Color cardBorder = Color(0xFFD4C4B0);
   
-  // Matched cards - success green gradient
-  static const Color matchedStart = Color(0xFF10B981);
-  static const Color matchedEnd = Color(0xFF059669);
+  // Card types (organic colors)
+  static const Color seedBrown = Color(0xFF8B7355);
+  static const Color leafGreen = Color(0xFF7FA779);
+  static const Color flowerPink = Color(0xFFE8A5A5);
+  static const Color seasonGold = Color(0xFFD4AF6A);
   
-  // Wrong match - subtle red
-  static const Color wrongMatchStart = Color(0xFFEF4444);
-  static const Color wrongMatchEnd = Color(0xFFDC2626);
+  // Plant states (emotional colors)
+  static const Color plantHealthy = Color(0xFF88C057); // Vibrant green
+  static const Color plantWilting = Color(0xFF9BA89C); // Faded green
+  static const Color plantThriving = Color(0xFF6DB33F); // Bright green
   
-  // Card border & shadow
-  static const Color cardBorder = Color(0xFFE2E8F0);
-  static const Color cardShadow = Color(0x40000000);
+  // Special effects (subtle)
+  static const Color particleGlow = Color(0xFFFFF8DC);
+  static const Color mistWhite = Color(0xFFFFFFFF);
   
-  // Suit colors - vibrant
-  static const Color hearts = Color(0xFFEC4899);
-  static const Color diamonds = Color(0xFFF59E0B);
-  static const Color clubs = Color(0xFF3B82F6);
-  static const Color spades = Color(0xFF8B5CF6);
-  
-  // UI elements
-  static const Color scoreText = Color(0xFFF1F5F9);
-  static const Color accentGold = Color(0xFFFBBF24);
-  static const Color buttonGradientStart = Color(0xFF8B5CF6);
-  static const Color buttonGradientEnd = Color(0xFF6366F1);
+  // UI text (low contrast, calm)
+  static const Color textPrimary = Color(0xFF5A5A5A);
+  static const Color textSecondary = Color(0xFF8A8A8A);
+  static const Color textHighlight = Color(0xFF7FA779);
 }
 
-class GameStyles {
-  static const TextStyle scoreStyle = TextStyle(
-    color: GameColors.scoreText,
-    fontSize: 28,
-    fontWeight: FontWeight.bold,
-    letterSpacing: 1.2,
+/// Typography (Soft and readable)
+class GardenTextStyles {
+  static const TextStyle title = TextStyle(
+    fontSize: 48,
+    fontWeight: FontWeight.w300, // Light weight
+    color: GardenColors.textPrimary,
+    letterSpacing: 4,
+    height: 1.2,
   );
   
-  static const TextStyle movesStyle = TextStyle(
-    color: GameColors.scoreText,
+  static const TextStyle subtitle = TextStyle(
     fontSize: 18,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w300,
+    color: GardenColors.textSecondary,
+    letterSpacing: 2,
   );
   
-  static const TextStyle cardRankStyle = TextStyle(
-    fontSize: 22,
-    fontWeight: FontWeight.bold,
-  );
-  
-  static const TextStyle cardSuitStyle = TextStyle(
+  static const TextStyle cardText = TextStyle(
     fontSize: 32,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 1,
   );
+  
+  static const TextStyle hint = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w300,
+    color: GardenColors.textSecondary,
+    fontStyle: FontStyle.italic,
+  );
+}
+
+/// Game balance (No pressure!)
+class GardenBalance {
+  // Garden health system
+  static const double healthyThreshold = 0.8; // 80%+ accuracy
+  static const double wiltingThreshold = 0.5; // Below 50%
+  
+  // Streak bonuses (not aggressive)
+  static const int rarePlantStreak = 5; // After 5 correct matches
+  static const int perfectStreak = 10; // After 10 correct
+  
+  // Recovery system (garden heals itself)
+  static const double recoveryRate = 0.1; // 10% recovery per good match
+  static const double wiltRate = 0.05; // Only 5% wilt on mistake
+}
+
+/// Card Type Definitions
+enum CardType {
+  seed,   // 🌱 Basic
+  leaf,   // 🍃 Boosts nearby
+  flower, // 🌸 Multiplier
+  season, // 🍂 Changes behavior
+}
+
+extension CardTypeExtension on CardType {
+  String get emoji {
+    switch (this) {
+      case CardType.seed:
+        return '🌱';
+      case CardType.leaf:
+        return '🍃';
+      case CardType.flower:
+        return '🌸';
+      case CardType.season:
+        return '🍂';
+    }
+  }
+  
+  Color get color {
+    switch (this) {
+      case CardType.seed:
+        return GardenColors.seedBrown;
+      case CardType.leaf:
+        return GardenColors.leafGreen;
+      case CardType.flower:
+        return GardenColors.flowerPink;
+      case CardType.season:
+        return GardenColors.seasonGold;
+    }
+  }
+  
+  String get name {
+    switch (this) {
+      case CardType.seed:
+        return 'SEED';
+      case CardType.leaf:
+        return 'LEAF';
+      case CardType.flower:
+        return 'FLOWER';
+      case CardType.season:
+        return 'SEASON';
+    }
+  }
+}
+
+/// Garden Themes (Unlockable)
+enum GardenTheme {
+  morning,  // Default: Soft green, warm light
+  forest,   // Deep greens, moss
+  desert,   // Sandy, cacti
+  night,    // Dark blues, moonlight
+}
+
+extension GardenThemeExtension on GardenTheme {
+  Color get skyColor {
+    switch (this) {
+      case GardenTheme.morning:
+        return GardenColors.skyMorning;
+      case GardenTheme.forest:
+        return const Color(0xFF264E36);
+      case GardenTheme.desert:
+        return const Color(0xFFFFF4E0);
+      case GardenTheme.night:
+        return const Color(0xFF1A2332);
+    }
+  }
+  
+  Color get groundColor {
+    switch (this) {
+      case GardenTheme.morning:
+        return GardenColors.grass;
+      case GardenTheme.forest:
+        return const Color(0xFF3A5F3F);
+      case GardenTheme.desert:
+        return const Color(0xFFD4A76A);
+      case GardenTheme.night:
+        return const Color(0xFF2A3A4A);
+    }
+  }
+}
+
+/// Animation Curves (All organic, no harsh transitions)
+class GardenCurves {
+  static const Curve gentle = Curves.easeInOutCubic;
+  static const Curve breath = Curves.easeInOutSine;
+  static const Curve grow = Curves.easeOutQuart;
+  static const Curve wilt = Curves.easeInQuad;
 }

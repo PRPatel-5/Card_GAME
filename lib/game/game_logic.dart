@@ -1,113 +1,156 @@
+import 'dart:math';
 import '../models/card_model.dart';
+import '../models/garden_state.dart';
+import '../utils/constants.dart';
 
-class GameLogic {
+/// Game Logic - Manages matching, garden growth, and emotional responses
+class GardenGameLogic {
+  GardenState gardenState = const GardenState();
   List<CardModel> flippedCards = [];
-  int score = 0;
-  int moves = 0;
-  int matches = 0;
-  int comboStreak = 0;
-  int bestCombo = 0;
-  DateTime? lastMatchTime;
+  List<CardModel> allCards = []; // Track all cards
   bool isProcessing = false;
+  final Random _random = Random();
 
+  /// Check if a card can be flipped
   bool canFlipCard(CardModel card) {
-    return !isProcessing && 
-           card.state == CardState.faceDown && 
-           flippedCards.length < 2;
+    return !isProcessing &&
+        card.state == CardState.faceDown &&
+        flippedCards.length < 2;
   }
 
-  void flipCard(CardModel card) {
+  /// Flip a card
+  CardModel flipCard(CardModel card) {
     if (canFlipCard(card)) {
-      card.state = CardState.faceUp;
-      flippedCards.add(card);
-      moves++;
-      
+      final updatedCard = card.copyWith(state: CardState.faceUp);
+      updateCard(updatedCard);
+      flippedCards.add(updatedCard);
+
       if (flippedCards.length == 2) {
         _checkForMatch();
       }
+      return updatedCard;
+    }
+    return card;
+  }
+
+  /// Update a card in the allCards list
+  void updateCard(CardModel updatedCard) {
+    final index = allCards.indexWhere((c) => c.id == updatedCard.id);
+    if (index != -1) {
+      allCards[index] = updatedCard;
     }
   }
 
+  /// Check if two flipped cards match
   void _checkForMatch() {
     isProcessing = true;
-    
+
     if (flippedCards.length == 2) {
       final card1 = flippedCards[0];
       final card2 = flippedCards[1];
-      
+
       if (card1.matches(card2)) {
-        // MATCH! Calculate combo bonus
-        final now = DateTime.now();
-        final timeSinceLastMatch = lastMatchTime != null 
-            ? now.difference(lastMatchTime!).inSeconds 
-            : 999;
-        
-        // Combo if matched within 3 seconds of last match
-        if (timeSinceLastMatch < 3) {
-          comboStreak++;
-        } else {
-          comboStreak = 1;
-        }
-        
-        // Update best combo
-        if (comboStreak > bestCombo) {
-          bestCombo = comboStreak;
-        }
-        
-        lastMatchTime = now;
-        
-        // Calculate score with combo multiplier
-        final baseScore = 100;
-        final comboBonus = (comboStreak - 1) * 50;
-        final timeBonus = timeSinceLastMatch < 2 ? 25 : 0;
-        
-        score += baseScore + comboBonus + timeBonus;
-        matches++;
-        
-        card1.state = CardState.matched;
-        card2.state = CardState.matched;
+        _handleCorrectMatch(card1, card2);
       } else {
-        // No match - reset combo
-        comboStreak = 0;
-        
-        // Deduct points for wrong match
-        score = (score - 10).clamp(0, double.infinity).toInt();
+        _handleWrongMatch(card1, card2);
       }
-      
-      flippedCards.clear();
-      isProcessing = false;
     }
   }
 
+  /// Handle correct match (grow garden)
+  void _handleCorrectMatch(CardModel card1, CardModel card2) {
+    // Update card states
+    final updatedCard1 = card1.onCorrectMatch();
+    final updatedCard2 = card2.onCorrectMatch();
+    
+    updateCard(updatedCard1);
+    updateCard(updatedCard2);
+
+    // Create new plant in garden
+    final newPlant = _createPlant(
+      card1.type,
+      isRare: updatedCard1.isRare || updatedCard2.isRare,
+    );
+
+    // Update garden state
+    gardenState = gardenState.onCorrectMatch(newPlant);
+
+    flippedCards.clear();
+    isProcessing = false;
+  }
+
+  /// Handle wrong match (slight wilt)
+  void _handleWrongMatch(CardModel card1, CardModel card2) {
+    // Update card states (gentle penalty)
+    final updatedCard1 = card1.onWrongMatch();
+    final updatedCard2 = card2.onWrongMatch();
+    
+    updateCard(updatedCard1);
+    updateCard(updatedCard2);
+
+    // Update garden state
+    gardenState = gardenState.onMistake();
+
+    flippedCards.clear();
+    isProcessing = false;
+  }
+
+  /// Create a plant for the garden
+  PlantGrowth _createPlant(CardType type, {bool isRare = false}) {
+    // Random position in garden area
+    final x = 50 + _random.nextDouble() * 260; // Keep within bounds
+    final y = GardenConstants.groundLevel - 50 - _random.nextDouble() * 100;
+
+    return PlantGrowth(
+      id: 'plant_${DateTime.now().millisecondsSinceEpoch}',
+      plantType: type,
+      x: x,
+      y: y,
+      isRare: isRare,
+    );
+  }
+
+  /// Check if game is complete
   bool isGameComplete(List<CardModel> allCards) {
     return allCards.every((card) => card.state == CardState.matched);
   }
 
-  int calculateStars() {
-    // 3 stars if completed with high efficiency
-    final efficiency = matches > 0 ? matches / moves : 0;
+  /// Get garden health message
+  String getHealthMessage() {
+    if (gardenState.isThriving) {
+      return 'Your garden is thriving! 🌿';
+    } else if (gardenState.isStruggling) {
+      return 'Your garden needs care... 🥀';
+    } else {
+      return 'Your garden is growing steadily. 🌱';
+    }
+  }
+
+  /// Get completion message (no harsh judgment)
+  String getCompletionMessage() {
+    final accuracy = gardenState.accuracy;
     
-    if (efficiency >= 0.95) return 3;
-    if (efficiency >= 0.80) return 2;
-    if (efficiency >= 0.65) return 1;
-    return 0;
+    if (accuracy >= 0.95) {
+      return 'A perfect garden has bloomed.';
+    } else if (accuracy >= 0.85) {
+      return 'A beautiful garden has grown.';
+    } else if (accuracy >= 0.70) {
+      return 'Your garden has taken root.';
+    } else {
+      return 'Seeds have been planted.';
+    }
   }
 
-  String getScoreRating() {
-    if (score >= 2000) return 'LEGENDARY! 🏆';
-    if (score >= 1500) return 'AMAZING! ⭐';
-    if (score >= 1000) return 'GREAT! 🎯';
-    if (score >= 500) return 'GOOD! 👍';
-    return 'KEEP TRYING! 💪';
-  }
-
-  void resetGame() {
+  /// Reset for new game
+  void reset() {
+    gardenState = const GardenState();
     flippedCards.clear();
-    score = 0;
-    moves = 0;
-    matches = 0;
-    comboStreak = 0;
-    lastMatchTime = null;
+    allCards.clear();
     isProcessing = false;
+  }
+
+  /// Progress time of day (for visual variety)
+  void progressTime() {
+    gardenState = gardenState.progressTimeOfDay();
   }
 }

@@ -1,5 +1,5 @@
-name: vita_card_game
-description: A relaxing card matching game built with Flutter and Flame
+name: memory_garden
+description: A calm card game where every decision grows a living garden
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -10,14 +10,24 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  
+  # Game Engine
   flame: ^1.12.0
   flame_audio: ^2.1.0
+  
+  # Animations
   flutter_animate: ^4.5.0
-  cupertino_icons: ^1.0.2
+  
+  # UI
   google_fonts: ^6.1.0
-  vibration: ^1.8.4
+  
+  # Storage (Garden Memory)
   shared_preferences: ^2.2.2
-  confetti: ^0.7.0
+  
+  # Utils
+  equatable: ^2.0.5
+  
+  cupertino_icons: ^1.0.2
 
 dev_dependencies:
   flutter_test:
@@ -29,6 +39,4 @@ flutter:
   
   assets:
     - assets/images/
-    - assets/images/cards/
-    - assets/images/ui/
     - assets/sounds/

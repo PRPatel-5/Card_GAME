@@ -1,21 +1,20 @@
 {
   "roots": [
-    "vita_card_game"
+    "memory_garden"
   ],
   "packages": [
     {
-      "name": "vita_card_game",
+      "name": "memory_garden",
       "version": "1.0.0+1",
       "dependencies": [
-        "confetti",
         "cupertino_icons",
+        "equatable",
         "flame",
         "flame_audio",
         "flutter",
         "flutter_animate",
         "google_fonts",
-        "shared_preferences",
-        "vibration"
+        "shared_preferences"
       ],
       "devDependencies": [
         "flutter_lints",
@@ -48,11 +47,16 @@
       ]
     },
     {
-      "name": "confetti",
-      "version": "0.7.0",
+      "name": "cupertino_icons",
+      "version": "1.0.8",
+      "dependencies": []
+    },
+    {
+      "name": "equatable",
+      "version": "2.0.8",
       "dependencies": [
-        "flutter",
-        "vector_math"
+        "collection",
+        "meta"
       ]
     },
     {
@@ -69,14 +73,6 @@
       ]
     },
     {
-      "name": "vibration",
-      "version": "1.9.0",
-      "dependencies": [
-        "flutter",
-        "vibration_platform_interface"
-      ]
-    },
-    {
       "name": "google_fonts",
       "version": "6.3.3",
       "dependencies": [
@@ -85,11 +81,6 @@
         "http",
         "path_provider"
       ]
-    },
-    {
-      "name": "cupertino_icons",
-      "version": "1.0.8",
-      "dependencies": []
     },
     {
       "name": "flutter_animate",
@@ -277,15 +268,6 @@
       "dependencies": [
         "flutter",
         "shared_preferences_platform_interface"
-      ]
-    },
-    {
-      "name": "vibration_platform_interface",
-      "version": "0.0.3",
-      "dependencies": [
-        "device_info_plus",
-        "flutter",
-        "plugin_platform_interface"
       ]
     },
     {
@@ -486,21 +468,6 @@
       ]
     },
     {
-      "name": "device_info_plus",
-      "version": "11.5.0",
-      "dependencies": [
-        "device_info_plus_platform_interface",
-        "ffi",
-        "file",
-        "flutter",
-        "flutter_web_plugins",
-        "meta",
-        "web",
-        "win32",
-        "win32_registry"
-      ]
-    },
-    {
       "name": "path_provider_foundation",
       "version": "2.5.1",
       "dependencies": [
@@ -615,31 +582,6 @@
       "dependencies": [
         "meta",
         "path"
-      ]
-    },
-    {
-      "name": "win32_registry",
-      "version": "2.1.0",
-      "dependencies": [
-        "ffi",
-        "meta",
-        "win32"
-      ]
-    },
-    {
-      "name": "win32",
-      "version": "5.15.0",
-      "dependencies": [
-        "ffi"
-      ]
-    },
-    {
-      "name": "device_info_plus_platform_interface",
-      "version": "7.0.3",
-      "dependencies": [
-        "flutter",
-        "meta",
-        "plugin_platform_interface"
       ]
     },
     {
