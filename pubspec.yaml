@@ -1,5 +1,5 @@
-name: vita_mahjong
-description: Vita Mahjong - 100 Level Card Matching Game
+name: card_game
+description: Vita Mahjong Card Game
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -10,15 +10,9 @@ dependencies:
   flutter:
     sdk: flutter
   provider: ^6.1.1
-  google_fonts: ^6.1.0
   shared_preferences: ^2.2.2
-  sqflite: ^2.3.0
-  path_provider: ^2.1.1
-  audioplayers: ^5.2.0
-  flutter_svg: ^2.0.9
-  animations: ^2.0.8
-  confetti: ^0.7.0
-  shimmer: ^3.0.0
+  flutter_animate: ^4.3.0
+  google_fonts: ^6.1.0
   cupertino_icons: ^1.0.6
 
 dev_dependencies:
@@ -31,4 +25,3 @@ flutter:
   assets:
     - assets/images/
     - assets/audio/
-    - assets/cards/

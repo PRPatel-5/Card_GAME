@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vita_mahjong/main.dart';
+import 'package:card_game/main.dart';
 
 void main() {
   testWidgets('App smoke test', (WidgetTester tester) async {
