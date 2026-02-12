@@ -1,331 +1,433 @@
-# 🌿 Memory Garden
+# 🀄 Vita Mahjong - 100 Level Card Matching Game
 
-> **"You don't win a game—you grow it."**
+> **"Match cards, unlock rewards, master 100 levels"**
 
-A calm card matching game where every decision grows a living, breathing garden. No timer. No pressure. No "Game Over". Just organic growth responding to how you play.
-
----
-
-## ✨ What Makes Memory Garden Different
-
-### 🎮 Not Your Typical Memory Game
-
-**Traditional Memory Games:**
-- ❌ Timed pressure
-- ❌ Harsh "Game Over" screens
-- ❌ Points-focused
-- ❌ Stressful gameplay
-
-**Memory Garden:**
-- ✅ No timer (play at your pace)
-- ✅ Garden responds emotionally
-- ✅ Growth-focused (not winning)
-- ✅ Calming experience
+A polished card matching game with 90 unique cards, 100 progressive levels, power-ups, and rewards every 5 levels. Built with Flutter and inspired by Japanese aesthetics.
 
 ---
 
-## 🌱 Core Features
+## ✨ Features
 
-### 1. **Emotional Garden System**
-Your garden is alive and remembers how you play:
+### 🎮 Core Gameplay
+- **100 Progressive Levels** - From Tutorial to Master difficulty
+- **90 Unique Cards** - Across 6 themed categories
+- **Power-Up System** - 5 different power-ups to help you win
+- **Reward System** - Unlock rewards every 5 levels
+- **Star Rating** - Earn 1-3 stars based on performance
+- **Save System** - Progress automatically saved
 
-```
-Good Matches → Plants grow, colors brighten
-Mistakes → Plants slightly wilt (but recover!)
-Streaks → Rare plants appear
-Perfect Play → Garden thrives with vibrant life
-```
+### 🎨 Card Categories (90 Cards Total)
 
-### 2. **Card Types with Personality**
+1. **Nature Elements** (15 cards) - Cherry Blossom, Maple Leaf, Bamboo, etc.
+2. **Japanese Symbols** (15 cards) - Torii Gate, Lucky Cat, Origami Crane, etc.
+3. **Celestial Objects** (15 cards) - Sun, Moon, Stars, Aurora, etc.
+4. **Mythical Creatures** (15 cards) - Dragons, Phoenix, Kitsune, etc.
+5. **Seasonal Icons** (15 cards) - Spring Blossom, Fireworks, Snow, etc.
+6. **Fortune Symbols** (15 cards) - Gold Coin, Lucky Seven, Rainbow, etc.
 
-| Type | Symbol | Effect |
-|------|--------|--------|
-| 🌱 **Seed** | Basic | Foundation plants |
-| 🍃 **Leaf** | Boost | Enhances nearby growth |
-| 🌸 **Flower** | Beauty | Adds color variety |
-| 🍂 **Season** | Change | Affects garden mood |
+### 🎯 Difficulty Progression
 
-### 3. **Living, Breathing Visuals**
+| Levels | Difficulty | Grid Size | Time | Hints | Shuffles |
+|--------|-----------|-----------|------|-------|----------|
+| 1-10 | Tutorial | 3×4 (12 cards) | 3 min | 5 | 3 |
+| 11-25 | Beginner | 4×4 (16 cards) | 4 min | 4 | 2 |
+| 26-40 | Intermediate | 4×6 (24 cards) | 5 min | 3 | 2 |
+| 41-60 | Advanced | 5×6 (30 cards) | 6 min | 2 | 1 |
+| 61-80 | Expert | 5×8 (40 cards) | 7 min | 2 | 1 |
+| 81-100 | Master | 6×8 (48 cards) | 8 min | 1 | 1 |
 
-- **Breathing Animation**: Cards gently pulse like they're alive
-- **Organic Growth**: Plants grow slowly and sway naturally
-- **Time Progression**: Garden lighting shifts (morning → noon → evening → night)
-- **Emotional Tints**: Colors shift based on your accuracy
+### 💎 Power-Ups
 
-### 4. **Calm Sound Design** *(Ready for audio)*
+1. **Hint** 💡 - Highlights one matching pair for 3 seconds
+2. **Shuffle** 🔄 - Randomizes all face-down cards
+3. **Time Freeze** ⏸️ - Pauses timer for 5 seconds (Unlocks Level 15)
+4. **Reveal All** 👁️ - Shows all cards for 2 seconds (Unlocks Level 20)
+5. **Undo** ↩️ - Reverts last incorrect match (Unlocks Level 40)
 
-Planned sounds that react to gameplay:
-- 🎵 Wind chimes on matches
-- 🍃 Leaves rustling on flips
-- 💧 Water drops on streaks
-- 🎹 Soft piano pads (ambient)
+### 🎁 Rewards (Every 5 Levels)
 
----
-
-## 🎨 Visual Identity
-
-### Color Palette
-
-```
-Sky:      Morning cream, evening peach
-Ground:   Earthy browns, soft grass green
-Cards:    Warm whites, natural borders
-Plants:   Organic greens, gentle pinks
-
-Everything is SOFT. Nothing is harsh.
-```
-
-### Design Philosophy
-
-1. **Minimal UI** - Focus stays on the garden
-2. **Organic Motion** - All animations curve naturally
-3. **Low Contrast** - Easy on the eyes
-4. **Breathing Space** - Never cluttered
-
----
-
-## 🧠 How It Works
-
-### Game Loop
-
-```
-1. Tap card → Gentle flip animation
-2. Tap another → Check for match
-3. Match? → Plant grows in garden
-4. No match? → Cards flip back (garden slightly fades)
-5. Garden responds emotionally throughout
-```
-
-### Streak System
-
-```
-3+ matches in a row → Garden mood brightens
-5+ matches → Rare plant variants appear
-10+ matches → Garden achieves "Perfect" state
-```
-
-### No Punishment
-
-- Wrong matches don't hurt you badly
-- Garden recovers as you improve
-- No "lives" or "energy" systems
-- No forced ads interrupting flow
-
----
-
-## 🛠 Technical Stack
-
-```yaml
-Framework: Flutter 3.0+
-Game Engine: Flame 1.12+
-Animations: flutter_animate
-Typography: Google Fonts (Cormorant Garamond)
-Storage: shared_preferences (garden memory)
-```
-
-### Architecture
-
-```
-lib/
-├── game/
-│   ├── memory_garden_game.dart   # Main game loop
-│   ├── garden_card_component.dart # Animated cards
-│   ├── deck_manager.dart          # Card generation
-│   └── game_logic.dart            # Match rules
-├── models/
-│   ├── card_model.dart            # Card data
-│   └── garden_state.dart          # Living garden state
-├── screens/
-│   ├── home_screen.dart           # Serene introduction
-│   ├── garden_screen.dart         # Main gameplay
-│   └── completion_screen.dart     # Gentle celebration
-└── utils/
-    └── constants.dart             # Design system
-```
+- **Level 5**: Hint Master - +2 permanent hints
+- **Level 10**: Shuffle King - +1 permanent shuffle
+- **Level 15**: Time Wizard - Unlock Time Freeze power-up
+- **Level 20**: Eagle Eye - Unlock Reveal All power-up
+- **Level 25**: Card Collector - Unlock Card Gallery
+- **Level 30**: Match Multiplier - Score multiplier system
+- **Level 40**: Undo Master - Unlock Undo power-up
+- **Level 50**: Zen Mode - Play without timer
+- **Level 100**: MAHJONG MASTER - Game completion!
 
 ---
 
 ## 🚀 Getting Started
 
-### Requirements
+### Prerequisites
 
-- Flutter SDK 3.0+
-- Dart 3.0+
-- Android Studio / VS Code
+```bash
+Flutter SDK 3.0+
+Dart 3.0+
+Android Studio / VS Code
+```
 
 ### Installation
 
 ```bash
-# 1. Clone or extract project
-cd memory_garden
+# 1. Clone repository
+git clone https://github.com/PRPatel-5/Card_GAME.git
+cd Card_GAME
 
-# 2. Get dependencies
+# 2. Install dependencies
 flutter pub get
 
 # 3. Run on device
 flutter run
 
-# 4. Build release APK
+# 4. Build APK
 flutter build apk --release
 ```
 
 ---
 
-## 🎯 Design Principles
+## 📁 Project Structure
 
-### 1. **Calmness First**
-Every decision prioritizes calm:
-- Slow, gentle animations (0.6s - 1.2s)
-- Soft colors with low saturation
-- No sudden movements or loud feedback
-
-### 2. **Emotional Feedback**
-The garden IS the feedback:
-- No numbers shouting at you
-- Visual growth shows progress
-- Colors shift with mood
-
-### 3. **No Pressure**
-Completely removed:
-- Timers
-- Lives/Energy systems
-- Forced restarts
-- Aggressive monetization
-
-### 4. **Organic Feel**
-Everything feels alive:
-- Breathing animations
-- Swaying plants
-- Natural curves in all motion
-
----
-
-## 📱 Target Audience
-
-**Perfect For:**
-- People who want to relax, not compete
-- Mindfulness & meditation app users
-- Anyone stressed by typical mobile games
-- Art/design enthusiasts
-- Casual players who value aesthetics
-
-**Unique Position:**
-- Between "brain training" and "zen experience"
-- Competes with: Alto's Adventure, Monument Valley
-- NOT competing with: Candy Crush, typical match games
+```
+lib/
+├── main.dart                          # App entry point
+├── models/
+│   ├── vita_card.dart                 # 90 card definitions
+│   ├── game_level.dart                # 100 level configurations
+│   ├── power_up.dart                  # Power-up definitions
+│   ├── reward.dart                    # Reward system
+│   └── player_progress.dart           # Save data model
+├── services/
+│   ├── game_state_service.dart        # Core game logic
+│   └── storage_service.dart           # Save/load system
+├── screens/
+│   ├── main_menu_screen.dart          # Home screen
+│   ├── level_select_screen.dart       # 100 level grid
+│   ├── gameplay_screen.dart           # Main game
+│   ├── reward_screen.dart             # Reward reveals
+│   ├── gallery_screen.dart            # Card collection
+│   └── settings_screen.dart           # Options
+├── widgets/
+│   ├── game_card_widget.dart          # Animated card
+│   └── power_up_button.dart           # Power-up UI
+└── utils/
+    └── vita_theme.dart                # Theme & constants
+```
 
 ---
 
-## 🎁 Future Features (Roadmap)
+## 🎨 Design System
 
-### Phase 1: Sound & Polish
-- [ ] Wind chime sound effects
-- [ ] Ambient nature sounds
-- [ ] Haptic feedback (gentle vibrations)
-- [ ] More plant varieties
+### Color Palette
 
-### Phase 2: Variety
-- [ ] Garden themes (Forest, Desert, Night)
-- [ ] Seasonal variations (Spring, Summer, Fall, Winter)
-- [ ] Weather effects (Rain, Fog, Sunshine)
-- [ ] Daily garden variations
+```dart
+Primary Dark:    #1A1B2E  // Background
+Primary Light:   #2C3E50  // Cards
+Accent Gold:     #FFD700  // Highlights
+Accent Crimson:  #DC143C  // Actions
+Accent Emerald:  #50C878  // Success
 
-### Phase 3: Memory
-- [ ] Save garden progress
-- [ ] Garden journal (visual history)
-- [ ] Long-term plant growth
-- [ ] Personal garden "album"
+Card Rarities:
+Common:          #228B22  // Green
+Rare:            #4169E1  // Blue
+Epic:            #9400D3  // Purple
+Legendary:       #FFD700  // Gold
+```
 
-### Phase 4: Social (Gentle)
-- [ ] Share garden screenshots
-- [ ] Garden exchange (see friends' gardens)
-- [ ] No competitive leaderboards (by design)
+### Typography
 
----
-
-## 💰 Monetization (Ethical)
-
-### Free Forever:
-- ✅ Full core gameplay
-- ✅ Morning garden theme
-- ✅ All basic plant types
-
-### Optional Premium ($2.99 one-time):
-- 🌲 Forest, Desert, Night themes
-- 🎵 Premium sound packs
-- 🌺 Rare plant cosmetics
-- 🧘 "Zen Mode" (no mistakes impact garden)
-
-**No:**
-- ❌ Energy systems
-- ❌ Forced ads
-- ❌ Time-gated content
-- ❌ Pay-to-win mechanics
+- **Titles**: Noto Serif JP (Japanese elegance)
+- **Body**: Noto Sans JP (Clean readability)
+- **Accent**: Gold with shadows for depth
 
 ---
 
-## 🎨 Brand Values
+## 🎮 How to Play
 
-**Memory Garden is:**
-- 🌿 Calm, not chaotic
-- 🌸 Growth-focused, not competitive
-- 🍃 Organic, not digital-feeling
-- 💚 Kind, not punishing
+1. **Select a Level** - Choose from 100 levels
+2. **Flip Cards** - Tap to reveal cards
+3. **Match Pairs** - Find matching cards
+4. **Use Power-Ups** - Strategic help when needed
+5. **Beat the Timer** - Complete before time runs out
+6. **Earn Stars** - 1-3 stars based on performance
+7. **Unlock Rewards** - Every 5 levels
 
-**Memory Garden is NOT:**
-- ❌ A brain training tool
-- ❌ A productivity app
-- ❌ A competitive challenge
-- ❌ A typical "match game"
+### Scoring System
 
----
+- **Base Match**: 100 points
+- **3+ Streak**: ×2 multiplier
+- **5+ Streak**: ×3 multiplier
+- **10+ Streak**: ×4 multiplier
 
-## 📊 Success Metrics
+### Star Requirements
 
-**We measure:**
-- Average session length (longer = more relaxing)
-- Return rate (do people come back?)
-- Screenshot shares (visual appeal)
-- App Store reviews mentioning "calm/relaxing"
-
-**We DON'T measure:**
-- Daily active users (no pressure)
-- Engagement tricks (no manipulation)
-- Ad revenue (clean experience)
+- **3 Stars**: Perfect (no mistakes) + 50%+ time remaining
+- **2 Stars**: ≤2 mistakes + 30%+ time remaining
+- **1 Star**: Level completed
 
 ---
 
-## 🙏 Credits & Inspiration
+## 🛠 Technical Details
+
+### Dependencies
+
+```yaml
+provider: ^6.1.1              # State management
+google_fonts: ^6.1.0          # Japanese fonts
+shared_preferences: ^2.2.2    # Save data
+sqflite: ^2.3.0              # Database
+path_provider: ^2.1.1         # File paths
+audioplayers: ^5.2.0          # Sound effects
+flutter_svg: ^2.0.9           # SVG graphics
+animations: ^2.0.8            # Transitions
+confetti: ^0.7.0              # Celebrations
+shimmer: ^3.0.0               # Loading effects
+```
+
+### Performance
+
+- **App Launch**: <2 seconds
+- **Screen Transitions**: <300ms
+- **Card Animations**: 60fps stable
+- **Memory Usage**: <150MB
+- **APK Size**: ~50MB
+
+---
+
+## 🎯 Game Mechanics
+
+### Level Generation
+
+Each level dynamically generates:
+- Random card selection from allowed categories
+- Shuffled card positions
+- Appropriate difficulty settings
+- Boss levels every 10 levels
+
+### Match Logic
+
+```dart
+1. Player taps first card → Flip animation
+2. Player taps second card → Check match
+3. If match: Mark as matched, add score, check completion
+4. If no match: Flip back after 600ms delay
+5. Update streak and multiplier
+```
+
+### Power-Up Cooldowns
+
+- Hint: 10 seconds
+- Shuffle: 15 seconds
+- Time Freeze: 30 seconds
+- Reveal All: 45 seconds
+- Undo: 20 seconds
+
+---
+
+## 📱 Supported Platforms
+
+- ✅ Android 5.0+ (API 21+)
+- ✅ iOS 12.0+
+- ✅ Web (experimental)
+- ✅ Desktop (Windows/macOS/Linux)
+
+### Orientation
+
+- **Primary**: Landscape (optimal gameplay)
+- **Fallback**: Portrait (adjusted layout)
+
+---
+
+## 🎨 Customization
+
+### Adding New Cards
+
+Edit `lib/models/vita_card.dart`:
+
+```dart
+VitaCard(
+  id: 91,
+  name: 'Your Card',
+  nameJp: '日本語',
+  emoji: '🎴',
+  category: CardCategory.nature,
+  rarity: CardRarity.rare,
+  color: Color(0xFFFFD700),
+),
+```
+
+### Modifying Levels
+
+Edit `lib/models/game_level.dart`:
+
+```dart
+GameLevel(
+  levelNumber: 101,
+  difficulty: LevelDifficulty.master,
+  gridRows: 8,
+  gridCols: 8,
+  totalCards: 64,
+  timeLimit: 600,
+  // ...
+)
+```
+
+### Adding Rewards
+
+Edit `lib/models/reward.dart`:
+
+```dart
+Reward(
+  levelUnlocked: 105,
+  title: 'New Reward',
+  titleJp: '新しい報酬',
+  emoji: '🎁',
+  description: 'Your reward description',
+  coinsBonus: 1000,
+  type: RewardType.feature,
+)
+```
+
+---
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+flutter test
+
+# Run with coverage
+flutter test --coverage
+
+# Integration tests
+flutter drive --target=test_driver/app.dart
+```
+
+---
+
+## 📊 Statistics Tracked
+
+- Total games played
+- Total matches made
+- Total mismatches
+- Longest streak
+- Total playtime
+- Perfect levels completed
+- Favorite card category
+- Most used power-up
+
+---
+
+## 🎵 Audio (Planned)
+
+### Sound Effects
+- Card flip: Soft paper rustle
+- Match correct: Pleasant chime
+- Match incorrect: Gentle tone
+- Power-up: Magical sparkle
+- Level complete: Victory bells
+
+### Music
+- Main menu: Peaceful koto melody
+- Easy levels: Gentle shamisen
+- Hard levels: Intense orchestral fusion
+
+---
+
+## 🚧 Roadmap
+
+### Phase 1: Polish (Current)
+- [x] 100 levels implemented
+- [x] 90 unique cards
+- [x] Power-up system
+- [x] Reward system
+- [ ] Sound effects
+- [ ] Background music
+
+### Phase 2: Features
+- [ ] Daily challenges
+- [ ] Achievement system
+- [ ] Statistics screen
+- [ ] Card trading
+- [ ] Zen mode implementation
+
+### Phase 3: Social
+- [ ] Share screenshots
+- [ ] Friend challenges
+- [ ] Leaderboards (optional)
+
+---
+
+## 💰 Monetization (Planned)
+
+### Free Forever
+- ✅ All 100 levels
+- ✅ All 90 cards
+- ✅ All power-ups
+- ✅ Full gameplay
+
+### Optional Premium ($2.99)
+- 🌲 Extra themes
+- 🎵 Premium sounds
+- 🌺 Cosmetic cards
+- 🧘 Zen mode
+
+**No ads, no energy systems, no pay-to-win**
+
+---
+
+## 🙏 Credits
 
 **Inspired by:**
-- Alto's Adventure (calm gameplay)
-- Monument Valley (visual zen)
-- Viridi (slow plant growth sim)
-- Forest (mindful waiting)
+- Traditional Mahjong
+- Japanese aesthetics
+- Calm mobile games
 
-**Built with love for:**
-- People who need a break
-- Those who appreciate craft
-- Anyone seeking calm in chaos
+**Built with:**
+- Flutter & Dart
+- Google Fonts
+- Material Design
 
 ---
 
 ## 📜 License
 
-MIT License - Feel free to learn from this!
+MIT License - See LICENSE file
 
 ---
 
-## 🌱 Final Words
+## 🌟 Contributing
 
-Memory Garden isn't trying to be the most popular game.
-It's trying to be the most calming one.
+Contributions welcome! Please:
 
-If even one person feels less stressed after playing,
-the garden has grown successfully.
+1. Fork the repository
+2. Create feature branch
+3. Commit changes
+4. Push to branch
+5. Open pull request
 
 ---
 
-**Made with 🌿 and intention**
+## 📧 Contact
 
-*"Every garden grows at its own pace."*
+- **GitHub**: [@PRPatel-5](https://github.com/PRPatel-5)
+- **Repository**: [Card_GAME](https://github.com/PRPatel-5/Card_GAME)
+
+---
+
+## 🎊 Final Words
+
+Vita Mahjong is designed to be:
+- 🎮 Fun and challenging
+- 🎨 Beautiful and polished
+- 🧘 Calm and relaxing
+- 💎 Rewarding and satisfying
+
+**Enjoy the game!** 🀄✨
+
+---
+
+**Made with 🀄 and Flutter**
+
+*"Every match brings you closer to mastery."*
