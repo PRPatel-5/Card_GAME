@@ -7,8 +7,6 @@ import '../services/game_state_service.dart';
 import '../widgets/game_card_widget.dart';
 import '../widgets/power_up_button.dart';
 import '../models/power_up.dart';
-import 'reward_screen.dart';
-import '../models/reward.dart';
 
 class GameplayScreen extends StatefulWidget {
   final GameLevel level;
@@ -182,7 +180,6 @@ class _GameplayScreenState extends State<GameplayScreen> {
 
   void _showCompletionDialog(BuildContext context, VitaGameState gameState) {
     final progress = gameState.getLevelProgress();
-    final hasReward = RewardDatabase.hasReward(widget.level.levelNumber);
     
     showDialog(
       context: context,
@@ -228,26 +225,6 @@ class _GameplayScreenState extends State<GameplayScreen> {
           ],
         ),
         actions: [
-          if (hasReward)
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => RewardScreen(
-                      level: widget.level.levelNumber,
-                    ),
-                  ),
-                );
-              },
-              child: Text(
-                'Claim Reward',
-                style: GoogleFonts.notoSansJp(
-                  color: VitaTheme.accentGold,
-                ),
-              ),
-            ),
           TextButton(
             onPressed: () {
               Navigator.pop(context);
